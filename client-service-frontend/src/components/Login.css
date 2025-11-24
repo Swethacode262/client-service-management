@@ -1,55 +1,104 @@
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-}
-
+/* Container */
 .login-container {
-  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgba(0, 0, 0, 0.3);
+  height: 100vh;
+  font-family: Arial, sans-serif;
 }
 
+/* Login Box */
 .login-box {
-  background-color: #fff;
+  width: 380px;
   padding: 40px;
-  border-radius: 10px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-  width: 350px;
-  text-align: center;
-}
-
-.login-box h2 {
-  margin-bottom: 30px;
-  color: #333;
-}
-
-.login-box input {
-  width: 100%;
-  padding: 12px;
-  margin: 10px 0;
-  border-radius: 5px;
   border: 1px solid #ccc;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  background-color: #fff;
 }
 
-.login-box button {
-  width: 100%;
-  padding: 12px;
-  margin-top: 15px;
-  border: none;
-  border-radius: 5px;
+/* Title */
+.login-box h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* User/Admin Buttons */
+.user-type-buttons {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.user-type-buttons button {
+  padding: 8px 20px;
+  border-radius: 8px;
+  border: 1px solid #6c757d;
+  cursor: pointer;
+  background-color: #f0f0f0;
+  color: #333;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+  margin: 0 5px;
+}
+
+.user-type-buttons button:hover {
+  background-color: #e0e0e0;
+}
+
+.user-type-buttons button.active {
   background-color: #007bff;
   color: #fff;
-  font-size: 16px;
-  cursor: pointer;
+  border-color: #007bff;
 }
 
-.login-box button:hover {
+/* Form Inputs */
+.login-box input {
+  width: 100%;
+  padding: 10px 12px;
+  margin-bottom: 12px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 0.9rem;
+}
+
+.login-box button[type="submit"] {
+  width: 100%;
+  padding: 10px;
+  border-radius: 6px;
+  border: none;
+  background-color: #007bff;
+  color: #fff;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.login-box button[type="submit"]:hover {
   background-color: #0056b3;
 }
 
+/* Error messages */
+.error {
+  color: red;
+  font-size: 0.8rem;
+  margin-bottom: 8px;
+  display: block;
+  text-align: left;
+}
+
+/* Registration link */
 .login-box p {
+  text-align: center;
   margin-top: 15px;
-  font-size: 14px;
+  font-size: 0.9rem;
+}
+
+.login-box p a {
+  text-decoration: none;
+  color: #007bff;
+}
+
+.login-box p a:hover {
+  text-decoration: underline;
 }
