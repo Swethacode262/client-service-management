@@ -4,7 +4,7 @@ import axios from 'axios';
 import './Login.css';
 
 function Login() {
-  const [userType, setUserType] = useState('USER');
+  const [userType, setUserType] = useState('USER'); // default User
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errors, setErrors] = useState({});
@@ -19,45 +19,75 @@ function Login() {
   };
 
   const handleLogin = async (e) => {
-  e.preventDefault();
-  const validationErrors = validate();
-  if (Object.keys(validationErrors).length > 0) {
-    setErrors(validationErrors);
-    return;
-  }
-
-  try {
-    const res = await axios.post('http://localhost:8080/api/user/login', { email, password });
-    
-    
-   const loggedInUser = {
-  id: res.data.id,   
-  username: res.data.username,
-  email: res.data.email,
-  role: userType === 'ADMIN' && email === 'swetharachuri@gmail.com' ? 'ADMIN' : 'USER'
-};
-localStorage.setItem('currentUser', JSON.stringify(loggedInUser));
-
-    localStorage.setItem('currentUser', JSON.stringify(loggedInUser));
-    navigate('/'); 
-  } catch (error) {
-    if (error.response && error.response.data) {
-      alert(error.response.data.message || 'Login failed');
-    } else {
-      alert('Login failed');
+    e.preventDefault();
+    const validationErrors = validate();
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
+      return;
     }
-  }
-};
 
+    try {
+      // Admin hardcoded credentials
+      if (userType === 'ADMIN') {
+        if (email === 'admin@example.com' && password === 'admin@123') {
+          const loggedInUser = {
+            id: 0,
+            username: 'Admin',
+            email: email,
+            role: 'ADMIN',
+          };
+          localStorage.setItem('currentUser', JSON.stringify(loggedInUser));
+          navigate('/');
+          return;
+        } else {
+          alert('Admin credentials incorrect. Try logging in as User.');
+          return;
+        }
+      }
+
+      // Normal User login via backend
+      const res = await axios.post('http://localhost:8080/api/user/login', { email, password });
+      const loggedInUser = {
+        id: res.data.id,
+        username: res.data.username,
+        email: res.data.email,
+        role: 'USER',
+      };
+      localStorage.setItem('currentUser', JSON.stringify(loggedInUser));
+      navigate('/');
+    } catch (error) {
+      if (error.response && error.response.data) {
+        alert(error.response.data.message || 'Login failed');
+      } else {
+        alert('Login failed');
+      }
+    }
+  };
 
   return (
     <div className="login-container">
       <div className="login-box">
         <h2>Login</h2>
+
+        {/* User/Admin Toggle */}
         <div className="user-type-buttons">
-    <button type="button" onClick={() => setUserType('ADMIN')}>Admin</button>
-    <button type="button" onClick={() => setUserType('USER')}>User</button>
-  </div>
+          <button
+            type="button"
+            className={userType === 'ADMIN' ? 'active' : ''}
+            onClick={() => setUserType('ADMIN')}
+          >
+            Admin
+          </button>
+          <button
+            type="button"
+            className={userType === 'USER' ? 'active' : ''}
+            onClick={() => setUserType('USER')}
+          >
+            User
+          </button>
+        </div>
+
+        {/* Login Form */}
         <form onSubmit={handleLogin}>
           <input
             type="email"
@@ -78,7 +108,7 @@ localStorage.setItem('currentUser', JSON.stringify(loggedInUser));
           <button type="submit">Login</button>
         </form>
 
-        {/* Link to Registration Page */}
+        {/* Registration link */}
         <p>Don't have an account? <Link to="/register">Register</Link></p>
       </div>
     </div>
