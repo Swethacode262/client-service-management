@@ -1,4 +1,4 @@
-/* Container */
+
 .login-container {
   display: flex;
   justify-content: center;
@@ -7,7 +7,6 @@
   font-family: Arial, sans-serif;
 }
 
-/* Login Box */
 .login-box {
   width: 380px;
   padding: 40px;
@@ -23,7 +22,7 @@
   margin-bottom: 20px;
 }
 
-/* User/Admin Buttons */
+
 .user-type-buttons {
   display: flex;
   justify-content: center;
@@ -52,7 +51,7 @@
   border-color: #007bff;
 }
 
-/* Form Inputs */
+
 .login-box input {
   width: 100%;
   padding: 10px 12px;
@@ -78,7 +77,7 @@
   background-color: #0056b3;
 }
 
-/* Error messages */
+
 .error {
   color: red;
   font-size: 0.8rem;
@@ -86,8 +85,6 @@
   display: block;
   text-align: left;
 }
-
-/* Registration link */
 .login-box p {
   text-align: center;
   margin-top: 15px;
