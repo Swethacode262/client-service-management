@@ -4,7 +4,7 @@ import axios from 'axios';
 import './Login.css';
 
 function Login() {
-  const [userType, setUserType] = useState('USER'); // default User
+  const [userType, setUserType] = useState('USER'); 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errors, setErrors] = useState({});
@@ -27,7 +27,7 @@ function Login() {
     }
 
     try {
-      // Admin hardcoded credentials
+      
       if (userType === 'ADMIN') {
         if (email === 'admin@example.com' && password === 'admin@123') {
           const loggedInUser = {
@@ -45,7 +45,7 @@ function Login() {
         }
       }
 
-      // Normal User login via backend
+      
       const res = await axios.post('http://localhost:8080/api/user/login', { email, password });
       const loggedInUser = {
         id: res.data.id,
